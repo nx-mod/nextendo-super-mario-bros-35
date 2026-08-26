@@ -51,6 +51,11 @@ go run .
 Configuration is entirely through environment variables — see [`example.env`](example.env). No
 secrets are baked into the source.
 
+**Build note:** the Eagle relay support this server uses isn't in the latest published
+[`nextendo-nex`](https://github.com/NextendoNetwork/nextendo-nex) release yet — `go.mod` points at
+a local sibling checkout (`replace ... => ../nextendo-nex`) until a release includes it. Clone
+`nextendo-nex` alongside this repo to build from source in the meantime.
+
 ## What this is not
 
 This server ships **no** Nintendo code, keys, or copyrighted assets. It is an independent

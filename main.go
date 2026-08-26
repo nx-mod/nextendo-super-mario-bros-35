@@ -92,6 +92,12 @@ func main() {
 			return
 		}
 		wsURL := fmt.Sprintf("wss://%s:%d/%d", nextendoHost, eaglePort, gid)
+		// Map (not StrParam): kinnay/SMB35's real reference server (source/main.py,
+		// MatchMaker.join()) sends this exact shape -- event.type=200000, param1=gid,
+		// event.map={"url":...,"token":...} -- confirmed 2026-08-18 via the actual
+		// upstream source, contradicting this package's earlier (wrong) note that the
+		// Map variant was "rejected outright". StrParam never got a single real client
+		// to even open an Eagle socket in two separate real-player tests tonight.
 		event := &nex.NotificationEvent{
 			PIDSource: securePID,
 			Type:      200000,
