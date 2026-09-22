@@ -15,14 +15,14 @@
 
 The NEX game server for **Super Mario Bros. 35** on [Nextendo Network](https://nextendo.network),
 whose retail online service Nintendo shut down in April 2021. It handles authentication and
-matchmaking, speaking the same NEX protocol the retail servers did — access key `0a69c592`, NEX
+matchmaking, speaking the same NEX protocol the retail servers did: access key `0a69c592`, NEX
 version `4.6.0`, per [kinnay/NintendoClients](https://github.com/kinnay/NintendoClients)' Game
 Server List.
 
 It is built on the [**nextendo-nex**](https://github.com/NextendoNetwork/nextendo-nex) core (PRUDP
 transport, RMC layer, common service protocols), plus this repo's own implementation of the three
 protocols the core doesn't provide generically: **Ranking2** (0x7A), **MatchmakeReferee** (0x78),
-and **MessageDelivery** (0x1B) — see [`smb35_stubs.go`](smb35_stubs.go).
+and **MessageDelivery** (0x1B): see [`smb35_stubs.go`](smb35_stubs.go).
 
 ### Not peer-to-peer
 
@@ -31,15 +31,15 @@ the up-to-35-player lobby; the actual gameplay traffic goes through a separate *
 session this server spawns per gathering and hands each joiner via a notification event (see
 `nextendo-nex`'s `eagle.go` for the relay itself, and this repo's `main.go` for the handoff). Eagle
 is a from-scratch Go port of the protocol documented on
-[NintendoClients' Eagle Protocol wiki page](https://github.com/kinnay/NintendoClients/wiki/Eagle-Protocol)
-— the same relay Tetris 99, PAC-MAN 99, and F-Zero 99 use, so it's shared core code, not
+[NintendoClients' Eagle Protocol wiki page](https://github.com/kinnay/NintendoClients/wiki/Eagle-Protocol),
+the same relay Tetris 99, PAC-MAN 99, and F-Zero 99 use, so it's shared core code, not
 SMB35-specific.
 
 **Status:** implemented against the documented wire protocol and
 [kinnay/SMB35](https://github.com/kinnay/SMB35)'s archived reference server (read for behavior, no
-code copied — see that repo's own AGPL-3.0 license); not yet verified against a real SMB35 client.
+code copied; see that repo's own AGPL-3.0 license), not yet verified against a real SMB35 client.
 Needs a real multi-client test (matchmaking lobby fill, Eagle handoff, in-game relay) before this is
-fully confirmed end-to-end — see the main Nextendo deployment for how that's tracked.
+fully confirmed end-to-end: see the main Nextendo deployment for how that's tracked.
 
 ## Running
 
@@ -48,11 +48,11 @@ cp example.env .env    # then edit .env
 go run .
 ```
 
-Configuration is entirely through environment variables — see [`example.env`](example.env). No
+Configuration is entirely through environment variables: see [`example.env`](example.env). No
 secrets are baked into the source.
 
 **Build note:** the Eagle relay support this server uses isn't in the latest published
-[`nextendo-nex`](https://github.com/NextendoNetwork/nextendo-nex) release yet — `go.mod` points at
+[`nextendo-nex`](https://github.com/NextendoNetwork/nextendo-nex) release yet: `go.mod` points at
 a local sibling checkout (`replace ... => ../nextendo-nex`) until a release includes it. Clone
 `nextendo-nex` alongside this repo to build from source in the meantime.
 
@@ -65,5 +65,5 @@ from the game itself, not a secret.
 
 ## License
 
-Released under the **[PolyForm Shield License 1.0.0](LICENSE.md)** — source-available: read, use,
+Released under the **[PolyForm Shield License 1.0.0](LICENSE.md)**, source-available: read, use,
 modify, and self-host, but do not use it to provide a product that competes with Nextendo Network.
